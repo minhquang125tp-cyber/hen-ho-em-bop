@@ -228,6 +228,64 @@ h2 {
   font-size: 24px;
 }
 
+.featured-restaurant {
+  position: relative;
+  background: linear-gradient(160deg, var(--pink-1), #ffe3ee);
+  border: 2px solid var(--pink-3);
+  border-radius: 22px;
+  padding: 26px 20px 20px;
+  margin: 8px 0 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.featured-restaurant:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(255, 92, 138, 0.25);
+}
+
+.featured-restaurant .f-emoji {
+  font-size: 44px;
+  margin-bottom: 8px;
+}
+
+.featured-restaurant .f-name {
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--pink-4);
+}
+
+.featured-restaurant .f-tag {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-top: 4px;
+}
+
+.featured-restaurant .f-cta {
+  margin-top: 14px;
+  background: linear-gradient(135deg, var(--pink-3), var(--purple));
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 999px;
+}
+
+.btn-link {
+  display: block;
+  margin: 0 auto 14px;
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
 .restaurant-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -156,25 +156,46 @@ function scoreRestaurant(r) {
   return r.match.filter((m) => wanted.includes(m)).length;
 }
 
+function selectRestaurant(name) {
+  document.getElementById("confirmRestaurant").textContent = name;
+  showScreen("confirm");
+}
+
 function renderRestaurants() {
   const scores = RESTAURANTS.map(scoreRestaurant);
-  const best = Math.max(...scores);
+  const bestIndex = scores.indexOf(Math.max(...scores));
+  const featured = RESTAURANTS[bestIndex];
 
+  const featuredEl = document.getElementById("featuredRestaurant");
+  featuredEl.innerHTML = `
+    <span class="badge-suggest">Gợi ý cho tụi mình 💗</span>
+    <span class="f-emoji">${featured.emoji}</span>
+    <span class="f-name">${featured.name}</span>
+    <span class="f-tag">${featured.tag}</span>
+    <span class="f-cta">Chọn quán này 💕</span>
+  `;
+  featuredEl.onclick = () => selectRestaurant(featured.name);
+
+  const showMoreBtn = document.getElementById("btnShowMore");
   const grid = document.getElementById("restaurantGrid");
+  showMoreBtn.textContent = "Xem quán khác";
+  grid.classList.add("hidden");
+  showMoreBtn.onclick = () => {
+    grid.classList.remove("hidden");
+    showMoreBtn.classList.add("hidden");
+  };
+
   grid.innerHTML = "";
   RESTAURANTS.forEach((r, i) => {
+    if (i === bestIndex) return;
     const card = document.createElement("div");
     card.className = "restaurant-card";
     card.innerHTML = `
-      ${scores[i] === best && best > 0 ? '<span class="badge-suggest">Gợi ý 💗</span>' : ""}
       <span class="r-emoji">${r.emoji}</span>
       <span class="r-name">${r.name}</span>
       <span class="r-tag">${r.tag}</span>
     `;
-    card.addEventListener("click", () => {
-      document.getElementById("confirmRestaurant").textContent = r.name;
-      showScreen("confirm");
-    });
+    card.addEventListener("click", () => selectRestaurant(r.name));
     grid.appendChild(card);
   });
 }
