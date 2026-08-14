@@ -79,15 +79,13 @@ function spawnHearts() {
 spawnHearts();
 
 /* ---------- Screen 1: Invitation ---------- */
-const btnYes = document.getElementById("btnYes");
-const btnNo = document.getElementById("btnNo");
-
 document.getElementById("btnYes").addEventListener("click", () => {
   quizIndex = 0;
   renderQuizStep();
   showScreen("quiz");
 });
 
+// Các lựa chọn "từ chối" né chuột/tap, không bao giờ bấm trúng được.
 function dodge(el) {
   const container = el.parentElement.getBoundingClientRect();
   const maxX = container.width - el.offsetWidth;
@@ -97,14 +95,17 @@ function dodge(el) {
   el.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-btnNo.addEventListener("mouseenter", () => dodge(btnNo));
-btnNo.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  dodge(btnNo);
-}, { passive: false });
-btnNo.addEventListener("click", (e) => {
-  e.preventDefault();
-  dodge(btnNo);
+["btnBusy", "btnLater"].forEach((id) => {
+  const btn = document.getElementById(id);
+  btn.addEventListener("mouseenter", () => dodge(btn));
+  btn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    dodge(btn);
+  }, { passive: false });
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    dodge(btn);
+  });
 });
 
 /* ---------- Screen 2: Quiz ---------- */
@@ -166,6 +167,7 @@ function renderRestaurants() {
 /* ---------- Screen 4: Restart ---------- */
 document.getElementById("btnRestart").addEventListener("click", () => {
   answers.food = answers.vibe = answers.budget = undefined;
-  btnNo.style.transform = "";
+  document.getElementById("btnBusy").style.transform = "";
+  document.getElementById("btnLater").style.transform = "";
   showScreen("invite");
 });

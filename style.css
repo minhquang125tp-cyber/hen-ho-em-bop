@@ -141,7 +141,7 @@ h2 {
   align-items: center;
   gap: 14px;
   position: relative;
-  min-height: 130px;
+  min-height: 190px;
   justify-content: center;
 }
 
@@ -171,7 +171,7 @@ h2 {
   position: relative;
 }
 
-#btnNo {
+#btnBusy, #btnLater {
   position: relative;
 }
 
