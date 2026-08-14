@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kết quả — hen-ho-em-bop</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .results-wrap {
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+  .key-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .key-form input {
+    flex: 1;
+    border: 3px solid var(--ink);
+    padding: 10px 12px;
+    font-family: var(--px-body);
+    font-size: 20px;
+    background: var(--white);
+    color: var(--text);
+  }
+  .sub-card {
+    background: var(--white);
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 0 var(--ink);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .sub-time {
+    font-family: var(--px-heading);
+    font-size: 9px;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+  }
+  .sub-row {
+    font-size: 19px;
+    margin: 3px 0;
+  }
+  .sub-row strong { color: var(--pink-4); }
+  .sub-tags {
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .sub-tag {
+    font-family: var(--px-heading);
+    font-size: 8px;
+    background: var(--pink-2);
+    border: 2px solid var(--ink);
+    padding: 4px 6px;
+  }
+  .empty-msg {
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 19px;
+  }
+</style>
+</head>
+<body>
+
+<div class="results-wrap">
+  <h1 style="text-align:center;">Kết quả của em Bộp 💌</h1>
+
+  <div class="key-form">
+    <input type="password" id="keyInput" placeholder="Nhập mã bí mật...">
+    <button class="btn btn-primary" id="loadBtn">Xem</button>
+  </div>
+
+  <div id="output"></div>
+</div>
+
+<script>
+const FOOD_LABEL = { italian: "Pizza/Pasta", japanese: "Nhật/Sushi", steak: "Beefsteak", chinese: "Món Trung" };
+const VIBE_LABEL = { cozy: "Riêng tư", lively: "Quẩy" };
+const ROUND2_LABEL = { beer: "Bia", wine: "Rượu" };
+
+const savedKey = sessionStorage.getItem("results_key");
+if (savedKey) {
+  document.getElementById("keyInput").value = savedKey;
+  load(savedKey);
+}
+
+document.getElementById("loadBtn").addEventListener("click", () => {
+  const key = document.getElementById("keyInput").value.trim();
+  if (!key) return;
+  sessionStorage.setItem("results_key", key);
+  load(key);
+});
+
+async function load(key) {
+  const output = document.getElementById("output");
+  output.innerHTML = '<p class="empty-msg">Đang tải...</p>';
+  try {
+    const res = await fetch("/api/results?key=" + encodeURIComponent(key));
+    if (!res.ok) {
+      output.innerHTML = '<p class="empty-msg">Sai mã hoặc lỗi tải dữ liệu.</p>';
+      return;
+    }
+    const data = await res.json();
+    render(data.submissions || []);
+  } catch (e) {
+    output.innerHTML = '<p class="empty-msg">Không kết nối được, thử lại nhé.</p>';
+  }
+}
+
+function render(subs) {
+  const output = document.getElementById("output");
+  if (subs.length === 0) {
+    output.innerHTML = '<p class="empty-msg">Chưa có lượt nào cả 👀</p>';
+    return;
+  }
+  output.innerHTML = subs.map((s) => {
+    const time = new Date(s.timestamp).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+    const restaurant = s.restaurant ? `${s.restaurant.name} (${s.restaurant.tag})` : "—";
+    const round2 = s.round2Place ? `${s.round2Place.name} (${s.round2Place.tag})` : "—";
+    return `
+      <div class="sub-card">
+        <div class="sub-time">${time}</div>
+        <div class="sub-row">🍽️ Ăn tối: <strong>${restaurant}</strong></div>
+        <div class="sub-row">🥂 Round 2: <strong>${round2}</strong></div>
+        <div class="sub-tags">
+          ${s.food ? `<span class="sub-tag">${FOOD_LABEL[s.food] || s.food}</span>` : ""}
+          ${s.vibe ? `<span class="sub-tag">${VIBE_LABEL[s.vibe] || s.vibe}</span>` : ""}
+          ${s.round2Answer ? `<span class="sub-tag">${ROUND2_LABEL[s.round2Answer] || s.round2Answer}</span>` : ""}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+</script>
+
+</body>
+</html>

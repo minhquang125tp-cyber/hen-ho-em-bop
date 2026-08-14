@@ -252,6 +252,18 @@ function selectRound2(place) {
   document.getElementById("finalRestaurant").textContent = chosenRestaurant.name;
   document.getElementById("finalRound2").textContent = place.name;
   showScreen("final");
+
+  fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      food: answers.food,
+      vibe: answers.vibe,
+      round2Answer: answers.round2,
+      restaurant: { name: chosenRestaurant.name, tag: chosenRestaurant.tag },
+      round2Place: { name: place.name, tag: place.tag },
+    }),
+  }).catch(() => {});
 }
 
 /* ---------- Screen 6: Restart ---------- */
