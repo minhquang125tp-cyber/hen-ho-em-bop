@@ -52,14 +52,41 @@
     </div>
   </section>
 
-  <!-- Screen 4: Confirmation -->
+  <!-- Screen 4: Dinner confirmed -->
   <section class="screen hidden" id="screen-confirm">
+    <div class="card card-wide">
+      <p class="lead">Bingoooo! Hẹn gặp em tối nay ở...</p>
+      <a class="confirm-hero" id="confirmHero" target="_blank" rel="noopener">
+        <span class="hero-emoji" id="confirmEmoji"></span>
+        <span class="hero-name" id="confirmRestaurant"></span>
+        <span class="hero-tag" id="confirmTag"></span>
+      </a>
+      <button class="btn btn-primary" id="btnGoRound2">Đi chơi tiếp nha? 🍻</button>
+    </div>
+  </section>
+
+  <!-- Screen 5: Choose round 2 spot -->
+  <section class="screen hidden" id="screen-round2">
+    <div class="card card-wide">
+      <div class="emoji-big">🥂</div>
+      <h2>Ăn xong mình ghé đâu tiếp đây?</h2>
+      <p class="lead small">Chỗ này chắc hợp gu tụi mình nè ✨</p>
+
+      <div class="featured-restaurant" id="featuredRound2"></div>
+
+      <button class="btn-link" id="btnShowMoreRound2">Xem chỗ khác</button>
+      <div class="restaurant-grid hidden" id="round2Grid"></div>
+    </div>
+  </section>
+
+  <!-- Screen 6: Final plan -->
+  <section class="screen hidden" id="screen-final">
     <div class="card">
       <div class="emoji-big pulse">🎉</div>
-      <h1>Hẹn gặp em tối nay!</h1>
+      <h1>Chốt kèo tối nay!</h1>
       <p class="lead">
-        Địa điểm: <strong id="confirmRestaurant"></strong><br>
-        Thời gian: <strong>Tối nay</strong> 🌙
+        Ăn tối: <strong id="finalRestaurant"></strong><br>
+        Sau đó: <strong id="finalRound2"></strong>
       </p>
       <p class="note">Anh sẽ qua đón em, nhớ diện thật xinh nha 💖</p>
       <button class="btn btn-primary" id="btnRestart">Chọn lại từ đầu</button>

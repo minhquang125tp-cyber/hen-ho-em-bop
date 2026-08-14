@@ -1,20 +1,32 @@
 /* ============================================================
-   DANH SÁCH QUÁN ĂN — SỬA Ở ĐÂY!
-   Đây là tên quán MẪU, hãy đổi "name" và "tag" thành quán thật
-   mà bạn muốn rủ đi. Giữ nguyên "emoji" và mảng "match" nếu muốn
-   giữ logic gợi ý theo câu trả lời, hoặc chỉnh lại cho hợp quán mới.
-
-   match: các tag mà quán này phù hợp, dùng để so với câu trả lời
-   quiz bên dưới (food/vibe/round2) — quán khớp nhiều nhất sẽ được
-   gắn nhãn "Gợi ý cho tụi mình".
+   DANH SÁCH QUÁN ĂN TỐI — SỬA Ở ĐÂY!
+   match: giá trị "value" của câu hỏi "food" trong QUIZ mà quán
+   này thuộc về (italian / japanese / steak / chinese). Quán đầu
+   tiên trong nhóm khớp sẽ được gợi ý nổi bật, các quán còn lại
+   nằm trong "Xem quán khác".
    ============================================================ */
 const RESTAURANTS = [
-  { name: "Quán Lẩu ABC", tag: "Lẩu Trung Hoa ấm bụng", emoji: "🍲", match: ["chinese", "cozy", "beer"] },
-  { name: "Nhà Hàng Nhật XYZ", tag: "Sushi & mì Nhật", emoji: "🍣", match: ["japanese", "cozy", "wine"] },
-  { name: "Quán Nướng Phố Cổ", tag: "Beefsteak & nướng", emoji: "🥩", match: ["steak", "lively", "beer"] },
-  { name: "Hải Sản Biển Xanh", tag: "Hải sản tươi sống", emoji: "🦞", match: ["lively", "wine"] },
-  { name: "Bistro Ánh Trăng", tag: "Pizza & mì Ý lãng mạn", emoji: "🍝", match: ["italian", "cozy", "wine"] },
-  { name: "Quán Ăn Vặt Con Đường", tag: "Đồ ăn vặt vỉa hè", emoji: "🥟", match: ["lively", "beer"] },
+  { name: "Aoyama", tag: "Món Nhật", emoji: "🍱", mapUrl: "https://maps.app.goo.gl/27LFEgkcViTgkBrt6?g_st=ac", match: ["japanese"] },
+  { name: "Sanuki Udon", tag: "Món Nhật", emoji: "🍜", mapUrl: "https://maps.app.goo.gl/WkeGfd3rigvsm3v6A?g_st=ac", match: ["japanese"] },
+  { name: "Hokkaido Sushi", tag: "Sushi", emoji: "🍣", mapUrl: "https://maps.app.goo.gl/SweTPB3cbrWK1SZ89?g_st=ac", match: ["japanese"] },
+  { name: "Captain Phook", tag: "Beef Steak", emoji: "🥩", mapUrl: "https://maps.app.goo.gl/AonKQuPWFscAKs6m6", match: ["steak"] },
+  { name: "Union Pizza", tag: "Pizza", emoji: "🍕", mapUrl: "https://maps.app.goo.gl/w9jcFynbPHdtBzc6A?g_st=ac", match: ["italian"] },
+  { name: "Pizza 4Ps", tag: "Pizza", emoji: "🍕", mapUrl: "https://maps.app.goo.gl/Veyzi7L6waNG2eDM9?g_st=ac", match: ["italian"] },
+  { name: "Pasta Club", tag: "Pasta", emoji: "🍝", mapUrl: "https://maps.app.goo.gl/UBMW1BapXhh95zLq7?g_st=ac", match: ["italian"] },
+  { name: "Mặn Mòi", tag: "Món Trung", emoji: "🥟", mapUrl: "https://maps.app.goo.gl/P7hWfWH1o6crBjbf6?g_st=ac", match: ["chinese"] },
+  { name: "Ivy Fortune", tag: "Món Trung", emoji: "🏮", mapUrl: "https://maps.app.goo.gl/EaKFm2ZyAvexy9YE6?g_st=ac", match: ["chinese"] },
+  { name: "Mùa Sake", tag: "Món Trung", emoji: "🍶", mapUrl: "https://maps.app.goo.gl/rfktF7CNVHxDqbw36?g_st=ac", match: ["chinese"] },
+  { name: "Mạch", tag: "Món Trung", emoji: "🥢", mapUrl: "https://maps.app.goo.gl/wYe7GsGCvjcY7uSB9?g_st=ac", match: ["chinese"] },
+];
+
+/* ============================================================
+   DANH SÁCH ĐỊA ĐIỂM ROUND 2 — SỬA Ở ĐÂY!
+   match: giá trị "value" của câu hỏi "round2" (beer / wine).
+   ============================================================ */
+const ROUND2_PLACES = [
+  { name: "7 Bridges", tag: "Quán bia", emoji: "🍻", mapUrl: "https://maps.app.goo.gl/qiuHmnANptnfaafK7?g_st=ac", match: ["beer"] },
+  { name: "Lost", tag: "Bar rượu", emoji: "🍷", mapUrl: "https://maps.app.goo.gl/5BU6qxRRpeF6pLQG7?g_st=ac", match: ["wine"] },
+  { name: "Lost and Found", tag: "Bar rượu", emoji: "🍸", mapUrl: "https://maps.app.goo.gl/n5rWq1EX9hu3Ki2y7?g_st=ac", match: ["wine"] },
 ];
 
 const QUIZ = [
@@ -49,12 +61,15 @@ const QUIZ = [
 
 const answers = {};
 let quizIndex = 0;
+let chosenRestaurant = null;
 
 const screens = {
   invite: document.getElementById("screen-invite"),
   quiz: document.getElementById("screen-quiz"),
   restaurants: document.getElementById("screen-restaurants"),
   confirm: document.getElementById("screen-confirm"),
+  round2: document.getElementById("screen-round2"),
+  final: document.getElementById("screen-final"),
 };
 
 function showScreen(name) {
@@ -150,59 +165,93 @@ function renderQuizStep() {
   });
 }
 
-/* ---------- Screen 3: Restaurant pick ---------- */
-function scoreRestaurant(r) {
-  const wanted = [answers.food, answers.vibe, answers.round2];
-  return r.match.filter((m) => wanted.includes(m)).length;
-}
+/* ---------- Màn "gợi ý 1 chỗ + xem thêm" dùng chung cho quán ăn & round 2 ---------- */
+function renderPickScreen({ items, wantedValue, featuredElId, showMoreBtnId, gridElId, onSelect }) {
+  const bestIndex = items.findIndex((it) => it.match.includes(wantedValue));
+  const featured = items[bestIndex >= 0 ? bestIndex : 0];
 
-function selectRestaurant(name) {
-  document.getElementById("confirmRestaurant").textContent = name;
-  showScreen("confirm");
-}
-
-function renderRestaurants() {
-  const scores = RESTAURANTS.map(scoreRestaurant);
-  const bestIndex = scores.indexOf(Math.max(...scores));
-  const featured = RESTAURANTS[bestIndex];
-
-  const featuredEl = document.getElementById("featuredRestaurant");
+  const featuredEl = document.getElementById(featuredElId);
   featuredEl.innerHTML = `
     <span class="badge-suggest">Gợi ý cho tụi mình 💗</span>
     <span class="f-emoji">${featured.emoji}</span>
     <span class="f-name">${featured.name}</span>
     <span class="f-tag">${featured.tag}</span>
-    <span class="f-cta">Chọn quán này 💕</span>
+    <span class="f-cta">Chọn chỗ này 💕</span>
   `;
-  featuredEl.onclick = () => selectRestaurant(featured.name);
+  featuredEl.onclick = () => onSelect(featured);
 
-  const showMoreBtn = document.getElementById("btnShowMore");
-  const grid = document.getElementById("restaurantGrid");
-  showMoreBtn.textContent = "Xem quán khác";
+  const showMoreBtn = document.getElementById(showMoreBtnId);
+  const grid = document.getElementById(gridElId);
   grid.classList.add("hidden");
+  showMoreBtn.classList.remove("hidden");
   showMoreBtn.onclick = () => {
     grid.classList.remove("hidden");
     showMoreBtn.classList.add("hidden");
   };
 
   grid.innerHTML = "";
-  RESTAURANTS.forEach((r, i) => {
-    if (i === bestIndex) return;
+  items.forEach((it) => {
+    if (it === featured) return;
     const card = document.createElement("div");
     card.className = "restaurant-card";
     card.innerHTML = `
-      <span class="r-emoji">${r.emoji}</span>
-      <span class="r-name">${r.name}</span>
-      <span class="r-tag">${r.tag}</span>
+      <span class="r-emoji">${it.emoji}</span>
+      <span class="r-name">${it.name}</span>
+      <span class="r-tag">${it.tag}</span>
     `;
-    card.addEventListener("click", () => selectRestaurant(r.name));
+    card.addEventListener("click", () => onSelect(it));
     grid.appendChild(card);
   });
 }
 
-/* ---------- Screen 4: Restart ---------- */
+/* ---------- Screen 3: Chọn quán ăn ---------- */
+function renderRestaurants() {
+  renderPickScreen({
+    items: RESTAURANTS,
+    wantedValue: answers.food,
+    featuredElId: "featuredRestaurant",
+    showMoreBtnId: "btnShowMore",
+    gridElId: "restaurantGrid",
+    onSelect: selectRestaurant,
+  });
+}
+
+function selectRestaurant(r) {
+  chosenRestaurant = r;
+  document.getElementById("confirmEmoji").textContent = r.emoji;
+  document.getElementById("confirmRestaurant").textContent = r.name;
+  document.getElementById("confirmTag").textContent = r.tag;
+  document.getElementById("confirmHero").href = r.mapUrl;
+  showScreen("confirm");
+}
+
+/* ---------- Screen 5: Chọn chỗ round 2 ---------- */
+document.getElementById("btnGoRound2").addEventListener("click", () => {
+  renderRound2();
+  showScreen("round2");
+});
+
+function renderRound2() {
+  renderPickScreen({
+    items: ROUND2_PLACES,
+    wantedValue: answers.round2,
+    featuredElId: "featuredRound2",
+    showMoreBtnId: "btnShowMoreRound2",
+    gridElId: "round2Grid",
+    onSelect: selectRound2,
+  });
+}
+
+function selectRound2(place) {
+  document.getElementById("finalRestaurant").textContent = chosenRestaurant.name;
+  document.getElementById("finalRound2").textContent = place.name;
+  showScreen("final");
+}
+
+/* ---------- Screen 6: Restart ---------- */
 document.getElementById("btnRestart").addEventListener("click", () => {
   answers.food = answers.vibe = answers.round2 = undefined;
+  chosenRestaurant = null;
   document.getElementById("btnBusy").style.transform = "";
   document.getElementById("btnLater").style.transform = "";
   showScreen("invite");
