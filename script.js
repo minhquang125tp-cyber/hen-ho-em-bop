@@ -5,16 +5,16 @@
    giữ logic gợi ý theo câu trả lời, hoặc chỉnh lại cho hợp quán mới.
 
    match: các tag mà quán này phù hợp, dùng để so với câu trả lời
-   quiz bên dưới (food/vibe/budget) — quán khớp nhiều nhất sẽ được
+   quiz bên dưới (food/vibe/round2) — quán khớp nhiều nhất sẽ được
    gắn nhãn "Gợi ý cho tụi mình".
    ============================================================ */
 const RESTAURANTS = [
-  { name: "Quán Lẩu ABC", tag: "Lẩu Trung Hoa ấm bụng", emoji: "🍲", match: ["chinese", "cozy", "budget"] },
-  { name: "Nhà Hàng Nhật XYZ", tag: "Sushi & mì Nhật", emoji: "🍣", match: ["japanese", "cozy", "premium"] },
-  { name: "Quán Nướng Phố Cổ", tag: "Beefsteak & nướng", emoji: "🥩", match: ["steak", "lively", "budget"] },
-  { name: "Hải Sản Biển Xanh", tag: "Hải sản tươi sống", emoji: "🦞", match: ["lively", "premium"] },
-  { name: "Bistro Ánh Trăng", tag: "Pizza & mì Ý lãng mạn", emoji: "🍝", match: ["italian", "cozy", "premium"] },
-  { name: "Quán Ăn Vặt Con Đường", tag: "Đồ ăn vặt vỉa hè", emoji: "🥟", match: ["lively", "budget"] },
+  { name: "Quán Lẩu ABC", tag: "Lẩu Trung Hoa ấm bụng", emoji: "🍲", match: ["chinese", "cozy", "beer"] },
+  { name: "Nhà Hàng Nhật XYZ", tag: "Sushi & mì Nhật", emoji: "🍣", match: ["japanese", "cozy", "wine"] },
+  { name: "Quán Nướng Phố Cổ", tag: "Beefsteak & nướng", emoji: "🥩", match: ["steak", "lively", "beer"] },
+  { name: "Hải Sản Biển Xanh", tag: "Hải sản tươi sống", emoji: "🦞", match: ["lively", "wine"] },
+  { name: "Bistro Ánh Trăng", tag: "Pizza & mì Ý lãng mạn", emoji: "🍝", match: ["italian", "cozy", "wine"] },
+  { name: "Quán Ăn Vặt Con Đường", tag: "Đồ ăn vặt vỉa hè", emoji: "🥟", match: ["lively", "beer"] },
 ];
 
 const QUIZ = [
@@ -37,11 +37,12 @@ const QUIZ = [
     ],
   },
   {
-    question: "Ngân sách tối nay mình chill kiểu nào?",
-    key: "budget",
+    question: "Ăn xong mình đi chơi tiếp nha?",
+    key: "round2",
     options: [
-      { label: "Bình dân, ấm bụng là được", emoji: "💸", value: "budget" },
-      { label: "Sang xịn mịn một chút", emoji: "💎", value: "premium" },
+      { label: "đi uống bia nữa chứ", emoji: "🍻", value: "beer" },
+      { label: "đi uống rụ đi", emoji: "🍷", value: "wine" },
+      { label: "đi về thui", emoji: "👋", value: "premium", dodge: true },
     ],
   },
 ];
@@ -109,6 +110,13 @@ function dodge(el) {
 });
 
 /* ---------- Screen 2: Quiz ---------- */
+// Option "sai" trong quiz rung lắc báo sai, khác với hiệu ứng né chuột ở màn mời.
+function shake(el) {
+  el.classList.remove("shake");
+  void el.offsetWidth; // restart animation nếu bấm liên tục
+  el.classList.add("shake");
+}
+
 function renderQuizStep() {
   const step = QUIZ[quizIndex];
   document.getElementById("quizStep").textContent = quizIndex + 1;
@@ -121,23 +129,30 @@ function renderQuizStep() {
     const btn = document.createElement("button");
     btn.className = "option-btn";
     btn.innerHTML = `<span class="option-emoji">${opt.emoji}</span><span>${opt.label}</span>`;
-    btn.addEventListener("click", () => {
-      answers[step.key] = opt.value;
-      quizIndex++;
-      if (quizIndex < QUIZ.length) {
-        renderQuizStep();
-      } else {
-        renderRestaurants();
-        showScreen("restaurants");
-      }
-    });
+    if (opt.dodge) {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        shake(btn);
+      });
+    } else {
+      btn.addEventListener("click", () => {
+        answers[step.key] = opt.value;
+        quizIndex++;
+        if (quizIndex < QUIZ.length) {
+          renderQuizStep();
+        } else {
+          renderRestaurants();
+          showScreen("restaurants");
+        }
+      });
+    }
     optionsEl.appendChild(btn);
   });
 }
 
 /* ---------- Screen 3: Restaurant pick ---------- */
 function scoreRestaurant(r) {
-  const wanted = [answers.food, answers.vibe, answers.budget];
+  const wanted = [answers.food, answers.vibe, answers.round2];
   return r.match.filter((m) => wanted.includes(m)).length;
 }
 
@@ -166,7 +181,7 @@ function renderRestaurants() {
 
 /* ---------- Screen 4: Restart ---------- */
 document.getElementById("btnRestart").addEventListener("click", () => {
-  answers.food = answers.vibe = answers.budget = undefined;
+  answers.food = answers.vibe = answers.round2 = undefined;
   document.getElementById("btnBusy").style.transform = "";
   document.getElementById("btnLater").style.transform = "";
   showScreen("invite");

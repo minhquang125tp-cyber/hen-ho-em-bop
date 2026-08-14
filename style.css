@@ -175,6 +175,19 @@ h2 {
   position: relative;
 }
 
+.shake {
+  animation: shake 0.4s ease;
+  border-color: var(--pink-4) !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
 .progress {
   font-size: 13px;
   color: var(--text-soft);
