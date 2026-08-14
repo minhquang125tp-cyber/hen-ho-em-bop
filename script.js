@@ -6,17 +6,17 @@
    nằm trong "Xem quán khác".
    ============================================================ */
 const RESTAURANTS = [
-  { name: "Aoyama", tag: "Món Nhật", emoji: "🍱", mapUrl: "https://maps.app.goo.gl/27LFEgkcViTgkBrt6?g_st=ac", match: ["japanese"] },
-  { name: "Sanuki Udon", tag: "Món Nhật", emoji: "🍜", mapUrl: "https://maps.app.goo.gl/WkeGfd3rigvsm3v6A?g_st=ac", match: ["japanese"] },
-  { name: "Hokkaido Sushi", tag: "Sushi", emoji: "🍣", mapUrl: "https://maps.app.goo.gl/SweTPB3cbrWK1SZ89?g_st=ac", match: ["japanese"] },
-  { name: "Captain Phook", tag: "Beef Steak", emoji: "🥩", mapUrl: "https://maps.app.goo.gl/AonKQuPWFscAKs6m6", match: ["steak"] },
-  { name: "Union Pizza", tag: "Pizza", emoji: "🍕", mapUrl: "https://maps.app.goo.gl/w9jcFynbPHdtBzc6A?g_st=ac", match: ["italian"] },
-  { name: "Pizza 4Ps", tag: "Pizza", emoji: "🍕", mapUrl: "https://maps.app.goo.gl/Veyzi7L6waNG2eDM9?g_st=ac", match: ["italian"] },
-  { name: "Pasta Club", tag: "Pasta", emoji: "🍝", mapUrl: "https://maps.app.goo.gl/UBMW1BapXhh95zLq7?g_st=ac", match: ["italian"] },
-  { name: "Mặn Mòi", tag: "Món Trung", emoji: "🥟", mapUrl: "https://maps.app.goo.gl/P7hWfWH1o6crBjbf6?g_st=ac", match: ["chinese"] },
-  { name: "Ivy Fortune", tag: "Món Trung", emoji: "🏮", mapUrl: "https://maps.app.goo.gl/EaKFm2ZyAvexy9YE6?g_st=ac", match: ["chinese"] },
-  { name: "Mùa Sake", tag: "Món Trung", emoji: "🍶", mapUrl: "https://maps.app.goo.gl/rfktF7CNVHxDqbw36?g_st=ac", match: ["chinese"] },
-  { name: "Mạch", tag: "Món Trung", emoji: "🥢", mapUrl: "https://maps.app.goo.gl/wYe7GsGCvjcY7uSB9?g_st=ac", match: ["chinese"] },
+  { name: "Aoyama", tag: "Món Nhật", emoji: "🍱", photo: "images/aoyama.jpg", mapUrl: "https://maps.app.goo.gl/27LFEgkcViTgkBrt6?g_st=ac", match: ["japanese"] },
+  { name: "Sanuki Udon", tag: "Món Nhật", emoji: "🍜", photo: "images/sanuki-udon.jpg", mapUrl: "https://maps.app.goo.gl/WkeGfd3rigvsm3v6A?g_st=ac", match: ["japanese"] },
+  { name: "Hokkaido Sushi", tag: "Sushi", emoji: "🍣", photo: "images/hokkaido-sushi.jpg", mapUrl: "https://maps.app.goo.gl/SweTPB3cbrWK1SZ89?g_st=ac", match: ["japanese"] },
+  { name: "Captain Phook", tag: "Beef Steak", emoji: "🥩", photo: "images/captain-phook.jpg", mapUrl: "https://maps.app.goo.gl/AonKQuPWFscAKs6m6", match: ["steak"] },
+  { name: "Union Pizza", tag: "Pizza", emoji: "🍕", photo: "images/union-pizza.jpg", mapUrl: "https://maps.app.goo.gl/w9jcFynbPHdtBzc6A?g_st=ac", match: ["italian"] },
+  { name: "Pizza 4Ps", tag: "Pizza", emoji: "🍕", photo: "images/pizza-4ps.jpg", mapUrl: "https://maps.app.goo.gl/Veyzi7L6waNG2eDM9?g_st=ac", match: ["italian"] },
+  { name: "Pasta Club", tag: "Pasta", emoji: "🍝", photo: "images/pasta-club.jpg", mapUrl: "https://maps.app.goo.gl/UBMW1BapXhh95zLq7?g_st=ac", match: ["italian"] },
+  { name: "Mặn Mòi", tag: "Món Trung", emoji: "🥟", photo: "images/man-moi.jpg", mapUrl: "https://maps.app.goo.gl/P7hWfWH1o6crBjbf6?g_st=ac", match: ["chinese"] },
+  { name: "Ivy Fortune", tag: "Món Trung", emoji: "🏮", photo: "images/fortune-ivy.jpg", mapUrl: "https://maps.app.goo.gl/EaKFm2ZyAvexy9YE6?g_st=ac", match: ["chinese"] },
+  { name: "Mùa Sake", tag: "Món Trung", emoji: "🍶", photo: "images/mua-sake.jpg", mapUrl: "https://maps.app.goo.gl/rfktF7CNVHxDqbw36?g_st=ac", match: ["chinese"] },
+  { name: "Mạch", tag: "Món Trung", emoji: "🥢", photo: "images/mach.jpg", mapUrl: "https://maps.app.goo.gl/wYe7GsGCvjcY7uSB9?g_st=ac", match: ["chinese"] },
 ];
 
 /* ============================================================
@@ -24,9 +24,9 @@ const RESTAURANTS = [
    match: giá trị "value" của câu hỏi "round2" (beer / wine).
    ============================================================ */
 const ROUND2_PLACES = [
-  { name: "7 Bridges", tag: "Quán bia", emoji: "🍻", mapUrl: "https://maps.app.goo.gl/qiuHmnANptnfaafK7?g_st=ac", match: ["beer"] },
-  { name: "Lost", tag: "Bar rượu", emoji: "🍷", mapUrl: "https://maps.app.goo.gl/5BU6qxRRpeF6pLQG7?g_st=ac", match: ["wine"] },
-  { name: "Lost and Found", tag: "Bar rượu", emoji: "🍸", mapUrl: "https://maps.app.goo.gl/n5rWq1EX9hu3Ki2y7?g_st=ac", match: ["wine"] },
+  { name: "7 Bridges", tag: "Quán bia", emoji: "🍻", photo: "images/7-bridges.jpg", mapUrl: "https://maps.app.goo.gl/qiuHmnANptnfaafK7?g_st=ac", match: ["beer"] },
+  { name: "Lost", tag: "Bar rượu", emoji: "🍷", photo: "images/lost.jpg", mapUrl: "https://maps.app.goo.gl/5BU6qxRRpeF6pLQG7?g_st=ac", match: ["wine"] },
+  { name: "Lost and Found", tag: "Bar rượu", emoji: "🍸", photo: "images/lost-and-found.png", mapUrl: "https://maps.app.goo.gl/n5rWq1EX9hu3Ki2y7?g_st=ac", match: ["wine"] },
 ];
 
 const QUIZ = [
@@ -173,8 +173,8 @@ function renderPickScreen({ items, wantedValue, featuredElId, showMoreBtnId, gri
   const featuredEl = document.getElementById(featuredElId);
   featuredEl.innerHTML = `
     <span class="badge-suggest">Gợi ý cho tụi mình 💗</span>
-    <span class="f-emoji">${featured.emoji}</span>
-    <span class="f-name">${featured.name}</span>
+    <img class="f-photo" src="${featured.photo}" alt="${featured.name}">
+    <span class="f-name">${featured.emoji} ${featured.name}</span>
     <span class="f-tag">${featured.tag}</span>
     <span class="f-cta">Chọn chỗ này 💕</span>
   `;
@@ -195,8 +195,8 @@ function renderPickScreen({ items, wantedValue, featuredElId, showMoreBtnId, gri
     const card = document.createElement("div");
     card.className = "restaurant-card";
     card.innerHTML = `
-      <span class="r-emoji">${it.emoji}</span>
-      <span class="r-name">${it.name}</span>
+      <img class="r-photo" src="${it.photo}" alt="${it.name}" loading="lazy">
+      <span class="r-name">${it.emoji} ${it.name}</span>
       <span class="r-tag">${it.tag}</span>
     `;
     card.addEventListener("click", () => onSelect(it));
@@ -218,8 +218,9 @@ function renderRestaurants() {
 
 function selectRestaurant(r) {
   chosenRestaurant = r;
-  document.getElementById("confirmEmoji").textContent = r.emoji;
-  document.getElementById("confirmRestaurant").textContent = r.name;
+  document.getElementById("confirmPhoto").src = r.photo;
+  document.getElementById("confirmPhoto").alt = r.name;
+  document.getElementById("confirmRestaurant").textContent = `${r.emoji} ${r.name}`;
   document.getElementById("confirmTag").textContent = r.tag;
   document.getElementById("confirmHero").href = r.mapUrl;
   showScreen("confirm");
