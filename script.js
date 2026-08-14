@@ -80,16 +80,21 @@ function showScreen(name) {
 /* ---------- Floating hearts background ---------- */
 function spawnHearts() {
   const bg = document.getElementById("heartsBg");
-  const emojis = ["💕", "💖", "💗", "✨"];
   for (let i = 0; i < 18; i++) {
-    const span = document.createElement("span");
-    span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    span.style.left = Math.random() * 100 + "%";
-    span.style.fontSize = 14 + Math.random() * 18 + "px";
+    const wrap = document.createElement("div");
+    wrap.className = "floating-heart";
+    wrap.style.left = Math.random() * 100 + "%";
     const duration = 8 + Math.random() * 10;
-    span.style.animationDuration = duration + "s";
-    span.style.animationDelay = -Math.random() * duration + "s";
-    bg.appendChild(span);
+    wrap.style.animationDuration = duration + "s";
+    wrap.style.animationDelay = -Math.random() * duration + "s";
+
+    const heart = document.createElement("span");
+    heart.className = "pixel-heart pixel-heart-sm";
+    const scale = 0.8 + Math.random() * 1.6;
+    heart.style.transform = `scale(${scale.toFixed(2)})`;
+    wrap.appendChild(heart);
+
+    bg.appendChild(wrap);
   }
 }
 spawnHearts();

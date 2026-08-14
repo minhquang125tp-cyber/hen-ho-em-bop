@@ -1,12 +1,16 @@
 :root {
-  --pink-1: #fff0f5;
-  --pink-2: #ffd6e8;
+  --pink-1: #ffe9f2;
+  --pink-2: #ffc2dc;
   --pink-3: #ff8fb3;
   --pink-4: #ff5c8a;
   --purple: #b088f9;
-  --text: #5a3d4d;
-  --text-soft: #8a6b7a;
+  --text: #4a1330;
+  --text-soft: #8a5a72;
   --white: #ffffff;
+  --ink: #4a1330;
+  --heart-color: #ff2d55;
+  --px-heading: "Press Start 2P", monospace;
+  --px-body: "VT323", monospace;
 }
 
 * { box-sizing: border-box; }
@@ -18,8 +22,12 @@ html, body {
 }
 
 body {
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(160deg, var(--pink-1) 0%, var(--pink-2) 55%, #ffe0ee 100%);
+  font-family: var(--px-body);
+  font-size: 20px;
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.5) 1.5px, transparent 1.5px),
+    linear-gradient(160deg, var(--pink-1) 0%, var(--pink-2) 55%, #ffd3e6 100%);
+  background-size: 14px 14px, cover;
   color: var(--text);
   min-height: 100vh;
   position: relative;
@@ -34,17 +42,16 @@ body {
   z-index: 0;
 }
 
-.hearts-bg span {
+.hearts-bg .floating-heart {
   position: absolute;
   bottom: -10%;
-  font-size: 22px;
-  opacity: 0.55;
+  opacity: 0.6;
   animation: floatUp linear infinite;
 }
 
 @keyframes floatUp {
   to {
-    transform: translateY(-115vh) rotate(20deg);
+    transform: translateY(-115vh);
     opacity: 0;
   }
 }
@@ -70,14 +77,15 @@ body {
 }
 
 .card {
-  background: var(--white);
-  border-radius: 28px;
-  padding: 36px 28px;
+  background: var(--pink-1);
+  border: 4px solid var(--ink);
+  border-radius: 0;
+  padding: 28px 22px;
   max-width: 420px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(255, 92, 138, 0.18);
-  animation: pop 0.35s ease;
+  box-shadow: 8px 8px 0 0 var(--ink);
+  animation: pop 0.25s steps(3, end);
 }
 
 .card-wide {
@@ -85,54 +93,414 @@ body {
 }
 
 @keyframes pop {
-  from { transform: scale(0.92); opacity: 0; }
+  from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
 .emoji-big {
-  font-size: 54px;
-  margin-bottom: 6px;
+  font-size: 48px;
+  margin-bottom: 8px;
   line-height: 1;
 }
 
 .emoji-big.pulse {
-  animation: pulse 1.2s ease-in-out infinite;
+  animation: pulse 1.2s steps(2) infinite;
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.12); }
+  50% { transform: scale(1.15); }
 }
 
 h1 {
-  font-size: 26px;
-  margin: 8px 0 12px;
+  font-family: var(--px-body);
+  font-size: 32px;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  margin: 10px 0 14px;
   color: var(--pink-4);
+  text-shadow: 2px 2px 0 var(--white);
 }
 
 h2 {
-  font-size: 22px;
-  margin: 8px 0 4px;
+  font-family: var(--px-body);
+  font-size: 27px;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  margin: 10px 0 10px;
   color: var(--pink-4);
+  text-shadow: 2px 2px 0 var(--white);
 }
 
 .lead {
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: var(--px-body);
+  font-size: 22px;
+  line-height: 1.4;
   color: var(--text);
   margin: 0 0 20px;
 }
 
 .lead.small {
-  font-size: 14px;
+  font-size: 19px;
   color: var(--text-soft);
   margin-bottom: 18px;
 }
 
 .note {
-  font-size: 14px;
+  font-size: 19px;
   color: var(--text-soft);
   margin: 0 0 22px;
+}
+
+/* ---------- Royal duo (prince & princess pixel sprites) ---------- */
+.royal-duo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.royal-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.royal-label {
+  font-family: var(--px-body);
+  font-size: 16px;
+  color: var(--text-soft);
+  letter-spacing: 0.5px;
+}
+
+.royal-heart {
+  margin-bottom: 30px;
+}
+
+.sprite {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.sprite-princess {
+  box-shadow:
+    18px 0px 0 0 #ffd23f,
+    36px 0px 0 0 #ffd23f,
+    54px 0px 0 0 #ffd23f,
+    18px 6px 0 0 #ffd23f,
+    24px 6px 0 0 #ffd23f,
+    30px 6px 0 0 #ffd23f,
+    36px 6px 0 0 #ff2d55,
+    42px 6px 0 0 #ffd23f,
+    48px 6px 0 0 #ffd23f,
+    54px 6px 0 0 #ffd23f,
+    12px 12px 0 0 #2b1b1f,
+    18px 12px 0 0 #2b1b1f,
+    24px 12px 0 0 #2b1b1f,
+    30px 12px 0 0 #2b1b1f,
+    36px 12px 0 0 #2b1b1f,
+    42px 12px 0 0 #2b1b1f,
+    48px 12px 0 0 #2b1b1f,
+    54px 12px 0 0 #2b1b1f,
+    60px 12px 0 0 #2b1b1f,
+    12px 18px 0 0 #2b1b1f,
+    18px 18px 0 0 #2b1b1f,
+    24px 18px 0 0 #ffd8b0,
+    30px 18px 0 0 #ffd8b0,
+    36px 18px 0 0 #ffd8b0,
+    42px 18px 0 0 #ffd8b0,
+    48px 18px 0 0 #ffd8b0,
+    54px 18px 0 0 #2b1b1f,
+    60px 18px 0 0 #2b1b1f,
+    12px 24px 0 0 #2b1b1f,
+    18px 24px 0 0 #2b1b1f,
+    24px 24px 0 0 #ffd8b0,
+    30px 24px 0 0 #2b1b1f,
+    36px 24px 0 0 #ffd8b0,
+    42px 24px 0 0 #2b1b1f,
+    48px 24px 0 0 #ffd8b0,
+    54px 24px 0 0 #2b1b1f,
+    60px 24px 0 0 #2b1b1f,
+    12px 30px 0 0 #2b1b1f,
+    18px 30px 0 0 #2b1b1f,
+    24px 30px 0 0 #ffd8b0,
+    30px 30px 0 0 #ffd8b0,
+    36px 30px 0 0 #ffd8b0,
+    42px 30px 0 0 #ffd8b0,
+    48px 30px 0 0 #ffd8b0,
+    54px 30px 0 0 #2b1b1f,
+    60px 30px 0 0 #2b1b1f,
+    30px 36px 0 0 #ffd8b0,
+    36px 36px 0 0 #ffd8b0,
+    42px 36px 0 0 #ffd8b0,
+    18px 42px 0 0 #ff5c99,
+    24px 42px 0 0 #ff5c99,
+    30px 42px 0 0 #ff5c99,
+    36px 42px 0 0 #ff5c99,
+    42px 42px 0 0 #ff5c99,
+    48px 42px 0 0 #ff5c99,
+    54px 42px 0 0 #ff5c99,
+    18px 48px 0 0 #ff5c99,
+    24px 48px 0 0 #ff5c99,
+    30px 48px 0 0 #ff5c99,
+    36px 48px 0 0 #ff5c99,
+    42px 48px 0 0 #ff5c99,
+    48px 48px 0 0 #ff5c99,
+    54px 48px 0 0 #ff5c99,
+    12px 54px 0 0 #ffffff,
+    18px 54px 0 0 #ff5c99,
+    24px 54px 0 0 #ff5c99,
+    30px 54px 0 0 #ff5c99,
+    36px 54px 0 0 #ff5c99,
+    42px 54px 0 0 #ff5c99,
+    48px 54px 0 0 #ff5c99,
+    54px 54px 0 0 #ff5c99,
+    60px 54px 0 0 #ffffff,
+    6px 60px 0 0 #e8407f,
+    12px 60px 0 0 #ff5c99,
+    18px 60px 0 0 #ff5c99,
+    24px 60px 0 0 #ff5c99,
+    30px 60px 0 0 #ff5c99,
+    36px 60px 0 0 #ff5c99,
+    42px 60px 0 0 #ff5c99,
+    48px 60px 0 0 #ff5c99,
+    54px 60px 0 0 #ff5c99,
+    60px 60px 0 0 #ff5c99,
+    66px 60px 0 0 #e8407f,
+    0px 66px 0 0 #e8407f,
+    6px 66px 0 0 #ff5c99,
+    12px 66px 0 0 #ff5c99,
+    18px 66px 0 0 #ff5c99,
+    24px 66px 0 0 #ff5c99,
+    30px 66px 0 0 #ff5c99,
+    36px 66px 0 0 #ff5c99,
+    42px 66px 0 0 #ff5c99,
+    48px 66px 0 0 #ff5c99,
+    54px 66px 0 0 #ff5c99,
+    60px 66px 0 0 #ff5c99,
+    66px 66px 0 0 #ff5c99,
+    72px 66px 0 0 #e8407f,
+    0px 72px 0 0 #ff5c99,
+    6px 72px 0 0 #ff5c99,
+    12px 72px 0 0 #ff5c99,
+    18px 72px 0 0 #ff5c99,
+    24px 72px 0 0 #ff5c99,
+    30px 72px 0 0 #ff5c99,
+    36px 72px 0 0 #ff5c99,
+    42px 72px 0 0 #ff5c99,
+    48px 72px 0 0 #ff5c99,
+    54px 72px 0 0 #ff5c99,
+    60px 72px 0 0 #ff5c99,
+    66px 72px 0 0 #ff5c99,
+    72px 72px 0 0 #ff5c99,
+    0px 78px 0 0 #ffffff,
+    6px 78px 0 0 #ffffff,
+    12px 78px 0 0 #ffffff,
+    18px 78px 0 0 #ffffff,
+    24px 78px 0 0 #ffffff,
+    30px 78px 0 0 #ffffff,
+    36px 78px 0 0 #ffffff,
+    42px 78px 0 0 #ffffff,
+    48px 78px 0 0 #ffffff,
+    54px 78px 0 0 #ffffff,
+    60px 78px 0 0 #ffffff,
+    66px 78px 0 0 #ffffff,
+    72px 78px 0 0 #ffffff,
+    30px 84px 0 0 #2b1b1f,
+    36px 84px 0 0 #2b1b1f,
+    42px 84px 0 0 #2b1b1f;
+}
+
+.sprite-prince {
+  box-shadow:
+    24px 0px 0 0 #ffd23f,
+    30px 0px 0 0 #ffd23f,
+    36px 0px 0 0 #ffd23f,
+    42px 0px 0 0 #ffd23f,
+    48px 0px 0 0 #ffd23f,
+    30px 6px 0 0 #2b1b1f,
+    36px 6px 0 0 #2b1b1f,
+    42px 6px 0 0 #2b1b1f,
+    12px 12px 0 0 #2b1b1f,
+    18px 12px 0 0 #2b1b1f,
+    24px 12px 0 0 #2b1b1f,
+    30px 12px 0 0 #2b1b1f,
+    36px 12px 0 0 #2b1b1f,
+    42px 12px 0 0 #2b1b1f,
+    48px 12px 0 0 #2b1b1f,
+    54px 12px 0 0 #2b1b1f,
+    60px 12px 0 0 #2b1b1f,
+    12px 18px 0 0 #2b1b1f,
+    18px 18px 0 0 #2b1b1f,
+    24px 18px 0 0 #ffd8b0,
+    30px 18px 0 0 #ffd8b0,
+    36px 18px 0 0 #ffd8b0,
+    42px 18px 0 0 #ffd8b0,
+    48px 18px 0 0 #ffd8b0,
+    54px 18px 0 0 #2b1b1f,
+    60px 18px 0 0 #2b1b1f,
+    12px 24px 0 0 #2b1b1f,
+    18px 24px 0 0 #2b1b1f,
+    24px 24px 0 0 #ffd8b0,
+    30px 24px 0 0 #2b1b1f,
+    36px 24px 0 0 #ffd8b0,
+    42px 24px 0 0 #2b1b1f,
+    48px 24px 0 0 #ffd8b0,
+    54px 24px 0 0 #2b1b1f,
+    60px 24px 0 0 #2b1b1f,
+    12px 30px 0 0 #2b1b1f,
+    18px 30px 0 0 #2b1b1f,
+    24px 30px 0 0 #ffd8b0,
+    30px 30px 0 0 #ffd8b0,
+    36px 30px 0 0 #ffd8b0,
+    42px 30px 0 0 #ffd8b0,
+    48px 30px 0 0 #ffd8b0,
+    54px 30px 0 0 #2b1b1f,
+    60px 30px 0 0 #2b1b1f,
+    30px 36px 0 0 #ffd8b0,
+    36px 36px 0 0 #ffd8b0,
+    42px 36px 0 0 #ffd8b0,
+    18px 42px 0 0 #c62742,
+    24px 42px 0 0 #c62742,
+    30px 42px 0 0 #c62742,
+    36px 42px 0 0 #c62742,
+    42px 42px 0 0 #c62742,
+    48px 42px 0 0 #c62742,
+    54px 42px 0 0 #c62742,
+    18px 48px 0 0 #c62742,
+    24px 48px 0 0 #c62742,
+    30px 48px 0 0 #c62742,
+    36px 48px 0 0 #c62742,
+    42px 48px 0 0 #c62742,
+    48px 48px 0 0 #c62742,
+    54px 48px 0 0 #c62742,
+    18px 54px 0 0 #ffd23f,
+    24px 54px 0 0 #c62742,
+    30px 54px 0 0 #c62742,
+    36px 54px 0 0 #c62742,
+    42px 54px 0 0 #c62742,
+    48px 54px 0 0 #c62742,
+    54px 54px 0 0 #ffd23f,
+    18px 60px 0 0 #ffd23f,
+    24px 60px 0 0 #ffd23f,
+    30px 60px 0 0 #ffd23f,
+    36px 60px 0 0 #ffd23f,
+    42px 60px 0 0 #ffd23f,
+    48px 60px 0 0 #ffd23f,
+    54px 60px 0 0 #ffd23f,
+    18px 66px 0 0 #c62742,
+    24px 66px 0 0 #c62742,
+    30px 66px 0 0 #c62742,
+    36px 66px 0 0 #c62742,
+    42px 66px 0 0 #c62742,
+    48px 66px 0 0 #c62742,
+    54px 66px 0 0 #c62742,
+    24px 72px 0 0 #2b1b1f,
+    30px 72px 0 0 #2b1b1f,
+    36px 72px 0 0 #2b1b1f,
+    42px 72px 0 0 #2b1b1f,
+    48px 72px 0 0 #2b1b1f,
+    24px 78px 0 0 #2b1b1f,
+    30px 78px 0 0 #2b1b1f,
+    42px 78px 0 0 #2b1b1f,
+    48px 78px 0 0 #2b1b1f,
+    24px 84px 0 0 #2b1b1f,
+    30px 84px 0 0 #2b1b1f,
+    42px 84px 0 0 #2b1b1f,
+    48px 84px 0 0 #2b1b1f;
+}
+
+/* ---------- Pixel hearts (built from box-shadow "pixels") ---------- */
+.pixel-heart {
+  position: relative;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.pixel-heart-sm {
+  width: 3px;
+  height: 3px;
+  box-shadow:
+    3px 0px 0 0 var(--heart-color),
+    6px 0px 0 0 var(--heart-color),
+    12px 0px 0 0 var(--heart-color),
+    15px 0px 0 0 var(--heart-color),
+    0px 3px 0 0 var(--heart-color),
+    3px 3px 0 0 var(--heart-color),
+    6px 3px 0 0 var(--heart-color),
+    9px 3px 0 0 var(--heart-color),
+    12px 3px 0 0 var(--heart-color),
+    15px 3px 0 0 var(--heart-color),
+    18px 3px 0 0 var(--heart-color),
+    0px 6px 0 0 var(--heart-color),
+    3px 6px 0 0 var(--heart-color),
+    6px 6px 0 0 var(--heart-color),
+    9px 6px 0 0 var(--heart-color),
+    12px 6px 0 0 var(--heart-color),
+    15px 6px 0 0 var(--heart-color),
+    18px 6px 0 0 var(--heart-color),
+    0px 9px 0 0 var(--heart-color),
+    3px 9px 0 0 var(--heart-color),
+    6px 9px 0 0 var(--heart-color),
+    9px 9px 0 0 var(--heart-color),
+    12px 9px 0 0 var(--heart-color),
+    15px 9px 0 0 var(--heart-color),
+    18px 9px 0 0 var(--heart-color),
+    3px 12px 0 0 var(--heart-color),
+    6px 12px 0 0 var(--heart-color),
+    9px 12px 0 0 var(--heart-color),
+    12px 12px 0 0 var(--heart-color),
+    15px 12px 0 0 var(--heart-color),
+    6px 15px 0 0 var(--heart-color),
+    9px 15px 0 0 var(--heart-color),
+    12px 15px 0 0 var(--heart-color),
+    9px 18px 0 0 var(--heart-color);
+}
+
+.pixel-heart-lg {
+  width: 6px;
+  height: 6px;
+  box-shadow:
+    6px 0px 0 0 var(--heart-color),
+    12px 0px 0 0 var(--heart-color),
+    24px 0px 0 0 var(--heart-color),
+    30px 0px 0 0 var(--heart-color),
+    0px 6px 0 0 var(--heart-color),
+    6px 6px 0 0 var(--heart-color),
+    12px 6px 0 0 var(--heart-color),
+    18px 6px 0 0 var(--heart-color),
+    24px 6px 0 0 var(--heart-color),
+    30px 6px 0 0 var(--heart-color),
+    36px 6px 0 0 var(--heart-color),
+    0px 12px 0 0 var(--heart-color),
+    6px 12px 0 0 var(--heart-color),
+    12px 12px 0 0 var(--heart-color),
+    18px 12px 0 0 var(--heart-color),
+    24px 12px 0 0 var(--heart-color),
+    30px 12px 0 0 var(--heart-color),
+    36px 12px 0 0 var(--heart-color),
+    0px 18px 0 0 var(--heart-color),
+    6px 18px 0 0 var(--heart-color),
+    12px 18px 0 0 var(--heart-color),
+    18px 18px 0 0 var(--heart-color),
+    24px 18px 0 0 var(--heart-color),
+    30px 18px 0 0 var(--heart-color),
+    36px 18px 0 0 var(--heart-color),
+    6px 24px 0 0 var(--heart-color),
+    12px 24px 0 0 var(--heart-color),
+    18px 24px 0 0 var(--heart-color),
+    24px 24px 0 0 var(--heart-color),
+    30px 24px 0 0 var(--heart-color),
+    12px 30px 0 0 var(--heart-color),
+    18px 30px 0 0 var(--heart-color),
+    24px 30px 0 0 var(--heart-color),
+    18px 36px 0 0 var(--heart-color);
+  animation: pulse 1s steps(2) infinite;
 }
 
 .invite-actions {
@@ -146,23 +514,31 @@ h2 {
 }
 
 .btn {
-  border: none;
-  border-radius: 999px;
-  padding: 14px 30px;
-  font-size: 16px;
-  font-weight: 600;
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  background: var(--pink-2);
+  padding: 12px 26px;
+  font-family: var(--px-body);
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: var(--text);
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transition: transform 0.05s linear, box-shadow 0.05s linear;
+}
+
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 var(--ink);
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--pink-3), var(--purple));
+  background: var(--pink-4);
   color: var(--white);
-  box-shadow: 0 10px 24px rgba(255, 92, 138, 0.35);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px) scale(1.03);
+  background: var(--pink-3);
 }
 
 .btn-ghost {
@@ -176,24 +552,26 @@ h2 {
 }
 
 .shake {
-  animation: shake 0.4s ease;
-  border-color: var(--pink-4) !important;
+  animation: shake 0.4s steps(2);
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
 }
 
 .progress {
-  font-size: 13px;
-  color: var(--text-soft);
-  font-weight: 600;
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
+  display: inline-block;
+  font-family: var(--px-heading);
+  font-size: 10px;
+  color: var(--white);
+  background: var(--pink-4);
+  border: 2px solid var(--ink);
+  padding: 5px 10px;
+  margin-bottom: 12px;
+  box-shadow: 3px 3px 0 0 var(--ink);
 }
 
 .options {
@@ -208,20 +586,22 @@ h2 {
   align-items: center;
   gap: 12px;
   background: var(--pink-1);
-  border: 2px solid transparent;
-  border-radius: 18px;
-  padding: 14px 18px;
-  font-size: 16px;
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 12px 16px;
+  font-family: var(--px-body);
+  font-size: 21px;
   color: var(--text);
   cursor: pointer;
   text-align: left;
-  transition: all 0.15s ease;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transition: transform 0.05s linear, box-shadow 0.05s linear;
 }
 
 .option-btn:hover {
-  border-color: var(--pink-3);
   background: var(--pink-2);
-  transform: translateX(4px);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
 }
 
 .option-emoji {
@@ -230,51 +610,54 @@ h2 {
 
 .featured-restaurant {
   position: relative;
-  background: linear-gradient(160deg, var(--pink-1), #ffe3ee);
-  border: 2px solid var(--pink-3);
-  border-radius: 22px;
-  padding: 26px 20px 20px;
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 18px 16px 16px;
   margin: 8px 0 14px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.05s linear, box-shadow 0.05s linear;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 5px 5px 0 0 var(--ink);
 }
 
 .featured-restaurant:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(255, 92, 138, 0.25);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 0 var(--ink);
 }
 
 .featured-restaurant .f-photo {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: 16px;
+  border: 3px solid var(--ink);
   margin-bottom: 12px;
 }
 
 .featured-restaurant .f-name {
+  font-family: var(--px-body);
   font-weight: 700;
-  font-size: 19px;
+  font-size: 22px;
   color: var(--pink-4);
 }
 
 .featured-restaurant .f-tag {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-soft);
   margin-top: 4px;
 }
 
 .featured-restaurant .f-cta {
   margin-top: 14px;
-  background: linear-gradient(135deg, var(--pink-3), var(--purple));
+  background: var(--pink-4);
   color: var(--white);
-  font-weight: 600;
-  font-size: 14px;
-  padding: 10px 22px;
-  border-radius: 999px;
+  font-family: var(--px-body);
+  font-size: 18px;
+  padding: 8px 20px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 0 var(--ink);
 }
 
 .btn-link {
@@ -282,8 +665,9 @@ h2 {
   margin: 0 auto 14px;
   background: none;
   border: none;
+  font-family: var(--px-body);
   color: var(--text-soft);
-  font-size: 13px;
+  font-size: 17px;
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -304,53 +688,54 @@ h2 {
 
 .restaurant-card {
   position: relative;
-  background: var(--pink-1);
-  border: 2px solid transparent;
-  border-radius: 18px;
-  padding: 16px 12px;
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 12px 10px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.05s linear, box-shadow 0.05s linear;
   text-align: center;
+  box-shadow: 4px 4px 0 0 var(--ink);
 }
 
 .restaurant-card:hover {
-  border-color: var(--pink-3);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(255, 92, 138, 0.2);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
 }
 
 .restaurant-card .r-photo {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: 12px;
+  border: 2px solid var(--ink);
   margin-bottom: 8px;
 }
 
 .restaurant-card .r-name {
+  font-family: var(--px-body);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   display: block;
 }
 
 .restaurant-card .r-tag {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--text-soft);
   display: block;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .badge-suggest {
   position: absolute;
   top: -10px;
-  right: -6px;
+  right: -8px;
   background: var(--pink-4);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(255, 92, 138, 0.4);
+  color: var(--white);
+  font-family: var(--px-body);
+  font-size: 15px;
+  padding: 3px 8px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 0 var(--ink);
   white-space: nowrap;
 }
 
@@ -360,38 +745,71 @@ h2 {
   align-items: center;
   justify-content: flex-start;
   text-decoration: none;
-  background: linear-gradient(160deg, var(--pink-1), #ffe3ee);
-  border: 2px solid var(--pink-3);
-  border-radius: 26px;
-  padding: 16px 16px 24px;
+  background: var(--white);
+  border: 4px solid var(--ink);
+  border-radius: 0;
+  padding: 14px 14px 20px;
   min-height: 70%;
   margin: 10px 0 26px;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 6px 6px 0 0 var(--ink);
+  transition: transform 0.05s linear, box-shadow 0.05s linear;
 }
 
 .confirm-hero:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(255, 92, 138, 0.28);
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--ink);
 }
 
 .confirm-hero .hero-photo {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 18px;
+  border: 3px solid var(--ink);
   margin-bottom: 16px;
 }
 
 .confirm-hero .hero-name {
-  font-size: 24px;
+  font-family: var(--px-body);
+  font-size: 26px;
   font-weight: 700;
   color: var(--pink-4);
   text-align: center;
 }
 
 .confirm-hero .hero-tag {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-soft);
   margin-top: 6px;
+}
+
+/* ---------- Equalizer bar decoration ---------- */
+.equalizer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 10px 8px 20px;
+}
+
+.equalizer span {
+  width: 6px;
+  background: var(--pink-3);
+  border: 1px solid var(--ink);
+  animation: eq 1s ease-in-out infinite;
+}
+
+.equalizer span:nth-child(6n+1) { height: 10px; animation-duration: 0.7s; }
+.equalizer span:nth-child(6n+2) { height: 22px; animation-duration: 0.9s; }
+.equalizer span:nth-child(6n+3) { height: 14px; animation-duration: 0.6s; }
+.equalizer span:nth-child(6n+4) { height: 28px; animation-duration: 1.1s; }
+.equalizer span:nth-child(6n+5) { height: 18px; animation-duration: 0.8s; }
+.equalizer span:nth-child(6n+6) { height: 8px; animation-duration: 1s; }
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
 }
