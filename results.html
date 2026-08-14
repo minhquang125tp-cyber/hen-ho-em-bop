@@ -79,6 +79,10 @@
   </div>
 
   <div id="output"></div>
+
+  <div style="text-align:center; margin-top:24px;">
+    <button class="btn-link" id="clearBtn">Xóa hết lịch sử</button>
+  </div>
 </div>
 
 <script>
@@ -96,6 +100,18 @@ document.getElementById("loadBtn").addEventListener("click", () => {
   const key = document.getElementById("keyInput").value.trim();
   if (!key) return;
   sessionStorage.setItem("results_key", key);
+  load(key);
+});
+
+document.getElementById("clearBtn").addEventListener("click", async () => {
+  const key = document.getElementById("keyInput").value.trim();
+  if (!key) return;
+  if (!confirm("Xóa hết lịch sử lựa chọn?")) return;
+  await fetch("/api/results", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ key }),
+  });
   load(key);
 });
 
