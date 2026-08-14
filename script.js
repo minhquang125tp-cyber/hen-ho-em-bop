@@ -9,23 +9,23 @@
    gắn nhãn "Gợi ý cho tụi mình".
    ============================================================ */
 const RESTAURANTS = [
-  { name: "Quán Lẩu ABC", tag: "Lẩu cay ấm bụng", emoji: "🍲", match: ["spicy", "cozy", "budget"] },
-  { name: "Nhà Hàng Nhật XYZ", tag: "Sushi & mì Nhật", emoji: "🍣", match: ["light", "cozy", "premium"] },
-  { name: "Quán Nướng Phố Cổ", tag: "BBQ nướng than", emoji: "🍖", match: ["bbq", "lively", "budget"] },
-  { name: "Hải Sản Biển Xanh", tag: "Hải sản tươi sống", emoji: "🦞", match: ["seafood", "lively", "premium"] },
-  { name: "Bistro Ánh Trăng", tag: "Món Âu lãng mạn", emoji: "🍝", match: ["light", "cozy", "premium"] },
-  { name: "Quán Ăn Vặt Con Đường", tag: "Đồ ăn vặt vỉa hè", emoji: "🌮", match: ["spicy", "lively", "budget"] },
+  { name: "Quán Lẩu ABC", tag: "Lẩu Trung Hoa ấm bụng", emoji: "🍲", match: ["chinese", "cozy", "budget"] },
+  { name: "Nhà Hàng Nhật XYZ", tag: "Sushi & mì Nhật", emoji: "🍣", match: ["japanese", "cozy", "premium"] },
+  { name: "Quán Nướng Phố Cổ", tag: "Beefsteak & nướng", emoji: "🥩", match: ["steak", "lively", "budget"] },
+  { name: "Hải Sản Biển Xanh", tag: "Hải sản tươi sống", emoji: "🦞", match: ["lively", "premium"] },
+  { name: "Bistro Ánh Trăng", tag: "Pizza & mì Ý lãng mạn", emoji: "🍝", match: ["italian", "cozy", "premium"] },
+  { name: "Quán Ăn Vặt Con Đường", tag: "Đồ ăn vặt vỉa hè", emoji: "🥟", match: ["lively", "budget"] },
 ];
 
 const QUIZ = [
   {
-    question: "Tối nay em thèm ăn kiểu gì? 😋",
+    question: "Tối nay mình ăn gì nhỉ?🧐",
     key: "food",
     options: [
-      { label: "Cay xè, đã miệng", emoji: "🌶️", value: "spicy" },
-      { label: "Nướng thơm lừng", emoji: "🍖", value: "bbq" },
-      { label: "Hải sản tươi ngon", emoji: "🦐", value: "seafood" },
-      { label: "Nhẹ nhàng, thanh đạm", emoji: "🥗", value: "light" },
+      { label: "pizza, mì ý hem", emoji: "🍝", value: "italian" },
+      { label: "sushi đồ nhật", emoji: "🍣", value: "japanese" },
+      { label: "hay là beefsteak", emoji: "🥩", value: "steak" },
+      { label: "hay đồ trung đi", emoji: "🥟", value: "chinese" },
     ],
   },
   {
