@@ -1,0 +1,283 @@
+:root {
+  --pink-1: #fff0f5;
+  --pink-2: #ffd6e8;
+  --pink-3: #ff8fb3;
+  --pink-4: #ff5c8a;
+  --purple: #b088f9;
+  --text: #5a3d4d;
+  --text-soft: #8a6b7a;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(160deg, var(--pink-1) 0%, var(--pink-2) 55%, #ffe0ee 100%);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hearts-bg span {
+  position: absolute;
+  bottom: -10%;
+  font-size: 22px;
+  opacity: 0.55;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-115vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.screen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.screen.hidden {
+  display: none;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 28px;
+  padding: 36px 28px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(255, 92, 138, 0.18);
+  animation: pop 0.35s ease;
+}
+
+.card-wide {
+  max-width: 520px;
+}
+
+@keyframes pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.emoji-big {
+  font-size: 54px;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.emoji-big.pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+h1 {
+  font-size: 26px;
+  margin: 8px 0 12px;
+  color: var(--pink-4);
+}
+
+h2 {
+  font-size: 22px;
+  margin: 8px 0 4px;
+  color: var(--pink-4);
+}
+
+.lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+
+.lead.small {
+  font-size: 14px;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+}
+
+.note {
+  font-size: 14px;
+  color: var(--text-soft);
+  margin: 0 0 22px;
+}
+
+.invite-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  min-height: 130px;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--pink-3), var(--purple));
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(255, 92, 138, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-ghost {
+  background: var(--pink-1);
+  color: var(--text-soft);
+  position: relative;
+}
+
+#btnNo {
+  position: relative;
+}
+
+.progress {
+  font-size: 13px;
+  color: var(--text-soft);
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--pink-1);
+  border: 2px solid transparent;
+  border-radius: 18px;
+  padding: 14px 18px;
+  font-size: 16px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--pink-3);
+  background: var(--pink-2);
+  transform: translateX(4px);
+}
+
+.option-emoji {
+  font-size: 24px;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+@media (max-width: 420px) {
+  .restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.restaurant-card {
+  position: relative;
+  background: var(--pink-1);
+  border: 2px solid transparent;
+  border-radius: 18px;
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.restaurant-card:hover {
+  border-color: var(--pink-3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 92, 138, 0.2);
+}
+
+.restaurant-card .r-emoji {
+  font-size: 30px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.restaurant-card .r-name {
+  font-weight: 600;
+  font-size: 14px;
+  display: block;
+}
+
+.restaurant-card .r-tag {
+  font-size: 12px;
+  color: var(--text-soft);
+  display: block;
+  margin-top: 4px;
+}
+
+.badge-suggest {
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  background: var(--pink-4);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(255, 92, 138, 0.4);
+  white-space: nowrap;
+}
+
+#confirmRestaurant {
+  color: var(--pink-4);
+}

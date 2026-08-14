@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Hẹn hò tối nay 💕</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💕</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+
+<main class="app">
+
+  <!-- Screen 1: Invitation -->
+  <section class="screen" id="screen-invite">
+    <div class="card">
+      <div class="emoji-big">💌</div>
+      <h1>Gửi em Bộp,</h1>
+      <p class="lead">Tối nay anh muốn mời em đi hẹn hò nè,<br>em đi với anh nha? 🥺💕</p>
+      <div class="invite-actions">
+        <button class="btn btn-primary" id="btnYes">Có chứ! 😍</button>
+        <button class="btn btn-ghost" id="btnNo">Để lần khác 😢</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 2: Quiz -->
+  <section class="screen hidden" id="screen-quiz">
+    <div class="card">
+      <div class="progress">
+        <span id="quizStep">1</span>/<span id="quizTotal">3</span>
+      </div>
+      <h2 id="quizQuestion">Câu hỏi</h2>
+      <div class="options" id="quizOptions"></div>
+    </div>
+  </section>
+
+  <!-- Screen 3: Choose restaurant -->
+  <section class="screen hidden" id="screen-restaurants">
+    <div class="card card-wide">
+      <div class="emoji-big">🍽️</div>
+      <h2>Tối nay mình ăn ở đâu nè?</h2>
+      <p class="lead small">Em chọn 1 quán em thích nhất nha ✨</p>
+      <div class="restaurant-grid" id="restaurantGrid"></div>
+    </div>
+  </section>
+
+  <!-- Screen 4: Confirmation -->
+  <section class="screen hidden" id="screen-confirm">
+    <div class="card">
+      <div class="emoji-big pulse">🎉</div>
+      <h1>Hẹn gặp em tối nay!</h1>
+      <p class="lead">
+        Địa điểm: <strong id="confirmRestaurant"></strong><br>
+        Thời gian: <strong>Tối nay</strong> 🌙
+      </p>
+      <p class="note">Anh sẽ qua đón em, nhớ diện thật xinh nha 💖</p>
+      <button class="btn btn-primary" id="btnRestart">Chọn lại từ đầu</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
