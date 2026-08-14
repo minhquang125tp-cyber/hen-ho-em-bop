@@ -29,11 +29,11 @@ const QUIZ = [
     ],
   },
   {
-    question: "Không khí mình muốn tối nay?",
+    question: "Hôm nay tâm trạng em thế nàooo",
     key: "vibe",
     options: [
-      { label: "Ấm cúng, lãng mạn", emoji: "🕯️", value: "cozy" },
-      { label: "Sôi động, náo nhiệt", emoji: "🎶", value: "lively" },
+      { label: "Em muốn riêng tư thui", emoji: "🕯️", value: "cozy" },
+      { label: "Dui lên quẩy lênnnnn", emoji: "🎶", value: "lively" },
     ],
   },
   {
